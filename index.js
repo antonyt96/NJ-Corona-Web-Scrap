@@ -6,7 +6,7 @@ var schedule = require('node-schedule');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-schedule.scheduleJob("5 19 * * 0-6", function(){
+schedule.scheduleJob("8 19 * * 0-6", function(){
 
 	axios.get('https://www.worldometers.info/coronavirus/country/us/').then((res)=>{
 
