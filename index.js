@@ -1,4 +1,8 @@
+var Express = require("express");
+var app =Express();
+var port = process.env.PORT ||3000;
 require('dotenv').config();
+
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
@@ -6,7 +10,19 @@ var schedule = require('node-schedule');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-schedule.scheduleJob("8 19 * * 0-6", function(){
+
+app.set("view engine", "ejs");
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.get("/", function(req, res){
+	
+	res.render("home");
+
+});
+
+
+schedule.scheduleJob("4 20 * * 0-6", function(){
 
 	axios.get('https://www.worldometers.info/coronavirus/country/us/').then((res)=>{
 
@@ -30,4 +46,9 @@ schedule.scheduleJob("8 19 * * 0-6", function(){
 			})
 			.then(message => console.log(message.sid));
 	});
+});
+
+app.listen(port, function(){
+
+	console.log("Server started")
 });
