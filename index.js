@@ -21,7 +21,7 @@ app.get("/", function(req, res){
 
 });
 
-schedule.scheduleJob("00 13 * * 0-6", function(){
+schedule.scheduleJob("00 15 * * 0-6", function(){
 
 	axios.get('https://www.worldometers.info/coronavirus/country/us/').then((res)=>{
 
