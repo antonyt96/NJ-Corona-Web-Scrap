@@ -18,7 +18,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get("/", function(req, res){
 	
 	res.render("home");
-	schedule.scheduleJob("12 20 * * 0-6", function(){
+
+});
+
+schedule.scheduleJob("19 20 * * 0-6", function(){
 
 	axios.get('https://www.worldometers.info/coronavirus/country/us/').then((res)=>{
 
@@ -43,9 +46,6 @@ app.get("/", function(req, res){
 			.then(message => console.log(message.sid));
 	});
 });
-
-});
-
 
 app.listen(port, function(){
 
